@@ -3,7 +3,8 @@ const app = express()
 const port = 8080
 const bodyParser = require('body-parser')
 const connetion = require('./dataBase/database')
-const CategoriesController = require("./categories/CategoriesController")
+const categoriesController = require("./categories/CategoriesController")
+const articlesController = require ("./articles/ArticlesController")
 
 //view engine
 app.set('view engine', 'ejs')
@@ -25,7 +26,8 @@ connetion
     })
 
 //utilização do rotas do arquivos categoriesController
-app.use("/", CategoriesController)
+app.use("/", categoriesController)
+app.use("/", articlesController)
 
 
 app.get("/", (req,res) =>{
