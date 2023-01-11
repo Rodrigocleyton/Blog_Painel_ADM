@@ -14,7 +14,7 @@ const Category = connection.define('categories', {
 })
 
 //toda vez que o program iniciar a tabela será criada
-
+//depois de executar retirar
 Category.sync({force: true})
 
 module.exports = Category
