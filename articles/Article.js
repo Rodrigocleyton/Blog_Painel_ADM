@@ -20,4 +20,6 @@ const Article = connection.define('articles', {
 Category.hasMany(Article)//Uma categoria tem muitos artigos, relacionamento 1 p muitos
 Article.belongsTo(Category)//Um artigo pertence a uma categoria, relacionamento 1 p 1
 
+//sincronização do Banco
+Article.sync({force: true})
 module.exports = Article

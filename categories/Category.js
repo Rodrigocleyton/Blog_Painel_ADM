@@ -13,4 +13,8 @@ const Category = connection.define('categories', {
     //slug é o endereço da categoria
 })
 
+//toda vez que o program iniciar a tabela será criada
+
+Category.sync({force: true})
+
 module.exports = Category
