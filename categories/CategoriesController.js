@@ -53,4 +53,18 @@ router.post("/categories/delete", (req, res) =>{
     }
 })
 
+router.get("/adimn/categories/edit/:id", (req,res)=>{
+    var id = req.params.id
+    Category.findPK(id).then(categoria =>{
+        if(categoria !=undefined) {
+
+        }else{
+            res.redirect("/admin/categories")
+        }
+    }).catch(err =>{
+        res.redirect("/admin/categories")
+    })
+})
+
+
 module.exports = router
