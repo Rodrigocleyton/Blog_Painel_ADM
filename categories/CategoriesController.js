@@ -53,15 +53,18 @@ router.post("/categories/delete", (req, res) =>{
     }
 })
 
-router.get("/adimn/categories/edit/:id", (req,res)=>{
+router.get("/admin/categories/edit/:id", (req,res)=>{
     var id = req.params.id
-    Category.findPK(id).then(categoria =>{
-        if(categoria !=undefined) {
-
+    if(isNaN(id)){
+        res.redirect("/admin/categories")
+    }
+    Category.findByPk(id).then(category=>{
+        if(category !=undefined) {
+            res.render("admin/categories/edit", {category:category})
         }else{
             res.redirect("/admin/categories")
         }
-    }).catch(err =>{
+    }).catch((erro) =>{
         res.redirect("/admin/categories")
     })
 })
