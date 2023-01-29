@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Category = require("./Category")
 const slugify = require("slugify")
+const { where } = require("sequelize")
 
 router.get("/admin/categories/new", (req,res)=>{
     res.render("admin/categories/new")
@@ -15,7 +16,7 @@ router.post("/categories/save", (req, res) =>{
             slug: slugify(title)
             //otimiza a instirng para url para que seja utilizado diretamente na rota
         }).then(()=>{
-            res.redirect("/")
+            res.redirect("/admin/categories")
         })
     } else {
         res.redirect("/admin/categories/new")
@@ -67,6 +68,20 @@ router.get("/admin/categories/edit/:id", (req,res)=>{
     }).catch((erro) =>{
         res.redirect("/admin/categories")
     })
+})
+
+router.post("/categories/update", (req, res) =>{
+    var id = req.body.id
+    var title = req.body.title
+    //title recebe os dados de var title atualizados
+    Category.update({title:title, slug: slugify(title)}, {where: {
+        id:id
+    }}).then(()=>{
+        res.redirect("/admin/categories")
+    }).catch((err)=>{
+        res.redirect("/admin/categories")
+    })
+
 })
 
 
